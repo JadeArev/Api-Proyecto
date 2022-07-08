@@ -7,9 +7,9 @@ const mascotaTabla = process.env.DB_TABLA_MASCOTA
 
 export class MascotaService {
 
-    getMascota= async () => {
+    getMascota = async () => {
         console.log('This is a function on the service');
-
+        console.log(config);
         const pool = await sql.connect(config);
         console.log("aca llegue")
         const response = await pool.request().query(`SELECT * from ${mascotaTabla}`);
