@@ -22,7 +22,7 @@ router.get('/:id',  async (req, res) => {
 
 router.post('',  async (req, res) => {
   console.log(`This is a post operation`);
-
+    console.log(res);
   const Refugio = await refugioService.createRefugio(req.body);
 
   return res.status(201).json(Refugio);
