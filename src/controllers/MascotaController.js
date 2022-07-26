@@ -27,7 +27,7 @@ router.post('', async (req, res) => {
 
   const Mascotas = await mascotaService.createMascota(req.body);
 
-  return res.status(201).json(pelOser);
+  return res.status(201).json(Mascotas);
 });
 
 router.put('/:id', async (req, res) => {

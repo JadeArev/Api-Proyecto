@@ -1,4 +1,4 @@
-export class PelOser {
+export class Mascota {
     IdMascota;
     Foto;
     Nombre;
