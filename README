@@ -1,15 +1,15 @@
 Para la correcta inicializacion del programa se debera entrar en la terminal se debera insertar "npm i" para que todos los programas que estos archivos utilizas se descarguen
 
-Tambien se debera iniciar la Base de Datos mediante SQL server y en este crear una base de datos llamada "Pj" ejecutar el archivo llamado BD
+Tambien se debera iniciar la Base de Datos mediante SQL server y en este crear una base de datos llamada "Api" ejecutar el archivo llamado BD
 
-Luego, en la terminal donde insertó "npm i", ahora ingrese "npm start" y abraló en postman
+Luego, en la terminal donde insertó "npm install -g", ahora ingrese "npm start" y abrirlo en postman o localhost
 
 Allí en postman ingrese en el link "
 token" y luego copie el resultado y peguelo en el apartado de Authorization
 
-Ahora para ejecutarlo tiene cuatro estilos de request diferentes en GET recibira todos los personajes al ingresar "localhost:5000/personaje" y todas las peliculas o series al ingresar "localhost:5000/peloser"
+Ahora para ejecutarlo tiene cuatro estilos de request diferentes en GET recibira todos los personajes al ingresar "localhost:5000/Mascota" y todas las peliculas o series al ingresar "localhost:5000/peloser"
 
-para recibir mas informacion sobre alguna respuesta ingrese "/" y el id del personaje, pelicula o serie que de la quiera obtener la informacion
+para recibir mas informacion sobre alguna respuesta ingrese "/" y el id de la mascota, raza o refugio que de la quiera obtener la información
 
 para ingresar una pelicula o serie deberá tener "localhost:5000/peloser", o si desea ingresar un personaje y en el apartado body/raw/JSON deberá ingresar los datos de la misma sin agregarle el ID
 
