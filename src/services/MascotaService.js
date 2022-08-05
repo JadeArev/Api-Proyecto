@@ -11,7 +11,7 @@ export class MascotaService {
         console.log('This is a function on the service');
         console.log(config);
         const pool = await sql.connect(config);
-        console.log("aca llegue")
+        console.log("aca llegué")
         const response = await pool.request().query(`SELECT * from ${mascotaTabla}`);
         console.log(response)
         return response.recordset;

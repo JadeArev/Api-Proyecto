@@ -53,7 +53,7 @@ export class FormularioService {
         .input('IdFormulario',sql.Int, id)
         .input('Descripcion',sql.VarChar, Formulario?.Descripcion ?? '')
        
-            .query(`UPDATE ${FormularioTabla} SET Descripcion = @Descripcion WHERE IdFormulario = @Id`);
+            .query(`UPDATE  ${FormularioTabla} SET Descripcion = @Descripcion WHERE IdFormulario = @Id`);
         console.log(response)
 
         return response.recordset;

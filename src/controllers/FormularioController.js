@@ -2,7 +2,7 @@ import {Router} from 'express';
 import { FormularioService } from '../services/FormularioService.js';
 
 const router = Router();
-const FormularioService = new FormularioService();
+const formularioService = new FormularioService();
 
 router.get('', async (req, res) => {
   console.log(`This is a get operation`);
@@ -16,7 +16,7 @@ router.get('/:id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a get operation`);
 
-  const Formulario = await Formularioervice.getFormularioById(req.params.id);
+  const Formulario = await formularioService.getFormularioById(req.params.id);
 
   return res.status(200).json(Formulario);
 });
