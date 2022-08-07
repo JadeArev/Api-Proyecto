@@ -7,7 +7,7 @@ const formularioService = new FormularioService();
 router.get('', async (req, res) => {
   console.log(`This is a get operation`);
 
-  const Formulario  = await Service.getFormulario();
+  const Formulario  = await formularioService.getFormulario();
  
   return res.status(200).json(Formulario);
 });

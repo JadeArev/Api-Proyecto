@@ -16,10 +16,7 @@ export class FormularioService {
         console.log(response)
         return response.recordset;
     }
-
-   
     
-
     getFormularioById = async (id) => {
         console.log('This is a function on the service');
 
