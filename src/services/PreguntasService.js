@@ -2,67 +2,67 @@ import sql from 'mssql'
 import config from '../../db.js'
 import 'dotenv/config'
 
-const FormularioTabla = process.env.DB_TABLA_FORMULARIO
+const PreguntaTabla = process.env.DB_TABLA_Pregunta
 
 
-export class FormularioService {
+export class PreguntaService {
 
-    getFormulario = async () => {
+    getPregunta = async () => {
         console.log('This is a function on the service');
         console.log(config);
         const pool = await sql.connect(config);
         console.log("aca llegue")
-        const response = await pool.request().query(`SELECT * from ${FormularioTabla}`);
+        const response = await pool.request().query(`SELECT * from ${PreguntaTabla}`);
         console.log(response)
         return response.recordset;
     }
     
-    getFormularioById = async (id) => {
+    getPreguntaById = async (id) => {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(`SELECT * from ${FormularioTabla} where IdFormulario = @id`);
+            .query(`SELECT * from ${PreguntaTabla} where IdPregunta = @id`);
         console.log(response)
         
             return response.recordset[0];
     }
 
-    createFormulario = async (Formulario) => {
+    createPregunta = async (Pregunta) => {
         console.log('This is a function on the service');
 
         const pool = await  sql.connect(config);
         const response = await pool.request()
-            .input('IdFormulario',sql.Int, id)
-            .input('Descripcion',sql.VarChar, Formulario?.Descripcion ?? '')
-            .query(`INSERT INTO ${FormularioTabla}(IdFormulario, Descripcion) VALUES (@IdFormulario, @Descripcion)`);
+            .input('IdPregunta',sql.Int, id)
+            .input('Descripcion',sql.VarChar, Pregunta?.Descripcion ?? '')
+            .query(`INSERT INTO ${PreguntaTabla}(IdPregunta, Descripcion) VALUES (@IdPregunta, @Descripcion)`);
         console.log(response)
 
         return response.recordset;
     }
 
-    updateFormularioById = async (id, Formulario) => {
+    updatePreguntaById = async (id, Pregunta) => {
         console.log('This is a function on the service');
         console.log(id)
         const pool =await  sql.connect(config);
         const response = await pool.request()
-        .input('IdFormulario',sql.Int, id)
-        .input('Descripcion',sql.VarChar, Formulario?.Descripcion ?? '')
+        .input('IdPregunta',sql.Int, id)
+        .input('Descripcion',sql.VarChar, Pregunta?.Descripcion ?? '')
        
-            .query(`UPDATE  ${FormularioTabla} SET Descripcion = @Descripcion WHERE IdFormulario = @Id`);
+            .query(`UPDATE  ${PreguntaTabla} SET Descripcion = @Descripcion WHERE IdPregunta = @Id`);
         console.log(response)
 
         return response.recordset;
     }
 
-    deleteFormularioById = async (id) => {
+    deletePreguntaById = async (id) => {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(`DELETE FROM ${FormularioTabla} WHERE IDFormulario = @id`);
+            .query(`DELETE FROM ${PreguntaTabla} WHERE IDPregunta = @id`);
         console.log(response)
 
         return response.recordset;
