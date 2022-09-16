@@ -8,7 +8,7 @@ const Service = new RespuestaService();
 router.get('', async (req, res) => {
   console.log(`This is a get operation`);
 
-  const Respuesta  = await Service.getRespuestas();
+  const Respuesta  = await Service.getRespuesta();
  
   return res.status(200).json(Respuesta);
 });
