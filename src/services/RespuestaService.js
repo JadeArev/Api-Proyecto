@@ -35,13 +35,12 @@ export class RespuestaService {
 
         const pool = await  sql.connect(config);
         const response = await pool.request()
-            .input('id',sql.Int, id)
-            .input('IdFormulario',sql.Int, Respuestas?.IdFormulario ?? '')
+            .input('IdRespuesta',sql.Int, Respuestas?.IdRespuesta ?? '')
             .input('Descripcion',sql.VarChar, Respuestas?.Descripcion ?? '')
-            .input('IdUsuario',sql.Int, Respuestas?.IdUsuario ?? '')
+            .input('IdFormulario',sql.Int, Respuestas?.IdUsuario ?? '')
             .input('IdMascota',sql.Int, Respuestas?.IdMascota ?? '')
-      
-            .query(`INSERT INTO ${RespuestasTabla}(IdFormulario,Descripcion, IdUsuario, IdMascota) VALUES (@IdFormulario, @Descripcion, @IdUsuario, @IdMascota`);
+            .input('IdUsuario',sql.Int, Respuestas?.IdUsuario ?? '')
+            .query(`INSERT INTO ${RespuestasTabla}(IdRespuesta,Descripcion, IdFormulario, IdMascota, IdUsuario) VALUES (@IdRespuesta, @Descripcion, @IdFormulario, @IdMascota, @IdUsuario)`);
         console.log(response)
 
         return response.recordset;
@@ -52,12 +51,12 @@ export class RespuestaService {
 
         const pool = await sql.connect(config);
         const response = await pool.request()
-        .input('id',sql.Int, id)
-        .input('IdFormulario',sql.Int, Respuestas?.IdFormulario ?? '')
-        .input('Descripcion',sql.VarChar, Respuestas?.Descripcion ?? '')
-        .input('IdUsuario',sql.Int, Respuestas?.IdUsuario ?? '')
-        .input('IdMascota',sql.Int, Respuestas?.IdMascota ?? '')
-            .query(`UPDATE Respuestas SET IdFormulario = @IdFormulario, Descripcion = @Descripcion, IdUsuario = @IdUsuario, IdMascota = @IdMascota WHERE IdRespuesta = @Id`);
+            .input('IdRespuesta',sql.Int, IdRespuesta)
+            .input('Descripcion',sql.VarChar, Respuestas?.Descripcion ?? '')
+            .input('IdFormulario',sql.Int, Respuestas?.IdFormulario?? '')
+            .input('IdMascota',sql.Int, Respuestas?.IdMascota ?? '')
+            .input('IdUsuario',sql.Int, Respuestas?.IdUsuario ?? '')
+            .query(`UPDATE Respuestas SET IdRespuesta = @IdRespuesta, Descripcion = @Descripcion, IdFormulario = @IdFormulario, IdMascota = @IdMascota, IdUsuario = @IdUsuario WHERE IdRespuestas = @Id`);
         console.log(response)
 
         return response.recordset;
@@ -69,7 +68,7 @@ export class RespuestaService {
         const pool =  await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(`DELETE FROM ${RespuestasTabla} WHERE IdRespuesta = @id`);
+            .query(`DELETE FROM ${RespuestasTabla} WHERE IdRespuestas = @id`);
         console.log(response)
 
         return response.recordset;
