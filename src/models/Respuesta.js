@@ -4,5 +4,5 @@ export class Respuestas {
     IdFormulario;
     IdUsuario;
     IdMascota;
-
+    Descripcion;
 }

@@ -7,14 +7,14 @@ Luego, en la terminal donde insertó "npm install -g", ahora ingrese "npm start"
 Allí en postman ingrese en el link "
 token" y luego copie el resultado y peguelo en el apartado de Authorization
 
-Ahora para ejecutarlo tiene cuatro estilos de request diferentes en GET recibira todos los mascotas al ingresar "localhost:5000/Mascota" y todas las mascotas o mascota al ingresar "localhost:5000/mascota"
+Ahora para ejecutarlo tiene cuatro estilos de request diferentes en GET recibira todos los personajes al ingresar "localhost:5000/Mascota" y todas las peliculas o series al ingresar "localhost:5000/peloser"
 
 para recibir mas informacion sobre alguna respuesta ingrese "/" y el id de la mascota, raza o refugio que de la quiera obtener la información
 
-para ingresar una Mascota o mascota deberá tener "localhost:5000/Mascota", o si desea ingresar un mascota y en el apartado body/raw/JSON deberá ingresar los datos de la misma sin agregarle el ID
+para ingresar una pelicula o serie deberá tener "localhost:5000/peloser", o si desea ingresar un personaje y en el apartado body/raw/JSON deberá ingresar los datos de la misma sin agregarle el ID
 
-Si desea actualizar una mascota debera ingresar en el link "localhost:5000/mascota" para el caso de actualizar una mascota o mascota y el link "localhost:5000/mascota" para actualizar un mascota ingresando en body/raw/JSON los datos nuevos
+Si desea actualizar una pelicula o serie o personaje debera ingresar en el link "localhost:5000/peloser" para el caso de actualizar una pelicula o serie y el link "localhost:5000/personaje" para actualizar un personaje ingresando en body/raw/JSON los datos nuevos
 
-si desea borrar una mascota debera ingresar "localhost:5000/mascota/" junto al id de la mascota y "localhost:5000/mascota/" junto al id del mascota para borrar una mascota
+si desea borrar una pelicula o serie debera ingresar "localhost:5000/peloser/" junto al id de la pelicula o serie y "localhost:5000/personaje/" junto al id del personaje para borrar un personaje
 
-
+si quiere conectar una pelicula con una serie lo podra hacer de la misma manera mencionada anteriormente pero en cambio, el link debera ser "localhost:5000/perPelOser"
