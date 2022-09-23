@@ -47,7 +47,7 @@ export class PostulacionService {
     updatePostulacionById = async (id, Postulacion) => {
         console.log('This is a function on the service');
         console.log(id)
-        const pool =await  sql.connect(config);
+        const pool = await  sql.connect(config);
         const response = await pool.request()
         .input('IdPostulacion',sql.Int, id)
         .input('IdUsuario',sql.Int, Postulacion?.IdUsuario ?? '')
