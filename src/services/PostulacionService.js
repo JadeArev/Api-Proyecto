@@ -36,7 +36,9 @@ export class PostulacionService {
         const response = await pool.request()
             .input('IdPostulacion',sql.Int, id)
             .input('IdUsuario',sql.Int, Postulacion?.IdUsuario ?? '')
-            .query(`INSERT INTO ${PostulacionTabla}(IdPostulacion, IdUsuario) VALUES (@IdPostulacion, @IdUsuario)`);
+            .input('IdMascota',sql.Int, Postulacion?.IdMascota ?? '')
+            .input('IdMascota',sql.Bit, Postulacion?.Castrado ?? '')
+            .query(`INSERT INTO ${PostulacionTabla}(IdPostulacion, IdUsuario, IdMascota, Castrado) VALUES (@IdPostulacion, @IdUsuario, @IdMascota, @Castrado)`);
         console.log(response)
 
         return response.recordset;
@@ -50,7 +52,7 @@ export class PostulacionService {
         .input('IdPostulacion',sql.Int, id)
         .input('IdUsuario',sql.Int, Postulacion?.IdUsuario ?? '')
        
-            .query(`UPDATE  ${PostulacionTabla} SET IdUsuario = @IdUsuario WHERE IdPostulacion = @Id`);
+            .query(`UPDATE  ${PostulacionTabla} SET IdUsuario = @IdUsuario, IdMascota = @IdMascota, Castrado = @Castrado WHERE IdPostulacion = @Id`);
         console.log(response)
 
         return response.recordset;
@@ -62,7 +64,7 @@ export class PostulacionService {
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(`DELETE FROM ${PostulacionTabla} WHERE IDPostulacion = @id`);
+            .query(`DELETE FROM ${PostulacionTabla} WHERE IdPostulacion = @id`);
         console.log(response)
 
         return response.recordset;
