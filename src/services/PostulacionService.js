@@ -37,8 +37,8 @@ export class PostulacionService {
             .input('IdPostulacion',sql.Int, id)
             .input('IdUsuario',sql.Int, Postulacion?.IdUsuario ?? '')
             .input('IdMascota',sql.Int, Postulacion?.IdMascota ?? '')
-            .input('IdMascota',sql.Bit, Postulacion?.Castrado ?? '')
-            .query(`INSERT INTO ${PostulacionTabla}(IdPostulacion, IdUsuario, IdMascota, Castrado) VALUES (@IdPostulacion, @IdUsuario, @IdMascota, @Castrado)`);
+            .input('IdMascota',sql.Bit, Postulacion?.Aceptado ?? '')
+            .query(`INSERT INTO ${PostulacionTabla}(IdPostulacion, IdUsuario, IdMascota, Aceptado) VALUES (@IdPostulacion, @IdUsuario, @IdMascota, @Aceptado)`);
         console.log(response)
 
         return response.recordset;
@@ -51,8 +51,10 @@ export class PostulacionService {
         const response = await pool.request()
         .input('IdPostulacion',sql.Int, id)
         .input('IdUsuario',sql.Int, Postulacion?.IdUsuario ?? '')
+        .input('IdMascota',sql.Int, Postulacion?.IdMascota ?? '')
+        .input('IdMascota',sql.Bit, Postulacion?.Aceptado ?? '')
        
-            .query(`UPDATE  ${PostulacionTabla} SET IdUsuario = @IdUsuario, IdMascota = @IdMascota, Castrado = @Castrado WHERE IdPostulacion = @Id`);
+            .query(`UPDATE  ${PostulacionTabla} SET IdUsuario = @IdUsuario, IdMascota = @IdMascota, Aceptado = @Aceptado WHERE IdPostulacion = @Id`);
         console.log(response)
 
         return response.recordset;
