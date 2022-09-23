@@ -8,7 +8,7 @@ const mascotaService = new MascotaService();
 router.get('', async (req, res) => {
   console.log(`This is a get operation`);
 
-  const Mascotas  = await mascotaService.getMascota();
+  const Mascotas = await mascotaService.getMascota();
  
   return res.status(200).json(Mascotas);
 });
