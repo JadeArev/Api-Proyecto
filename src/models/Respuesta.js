@@ -1,8 +1,7 @@
 export class Respuestas {
 
     IdRespuesta;
-    IdFormulario;
-    IdUsuario;
-    IdMascota;
+    IdPregunta;
+    IdPostulacion;
     Descripcion;
 }

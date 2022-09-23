@@ -37,10 +37,9 @@ export class RespuestaService {
         const response = await pool.request()
             .input('IdRespuesta',sql.Int, Respuestas?.IdRespuesta ?? '')
             .input('Descripcion',sql.VarChar, Respuestas?.Descripcion ?? '')
-            .input('IdFormulario',sql.Int, Respuestas?.IdUsuario ?? '')
-            .input('IdMascota',sql.Int, Respuestas?.IdMascota ?? '')
-            .input('IdUsuario',sql.Int, Respuestas?.IdUsuario ?? '')
-            .query(`INSERT INTO ${RespuestasTabla}(IdRespuesta,Descripcion, IdFormulario, IdMascota, IdUsuario) VALUES (@IdRespuesta, @Descripcion, @IdFormulario, @IdMascota, @IdUsuario)`);
+            .input('IdPregunta',sql.Int, Respuestas?.IdPregunta ?? '')
+            .input('IdPostulacion',sql.Int, Respuestas?.IdPostulacion ?? '')
+            .query(`INSERT INTO ${RespuestasTabla}(IdRespuesta,Descripcion, IdPregunta, IdPostulacion) VALUES (@IdRespuesta, @Descripcion, @IdPregunta, @IdPostulacion)`);
         console.log(response)
 
         return response.recordset;
@@ -51,12 +50,11 @@ export class RespuestaService {
 
         const pool = await sql.connect(config);
         const response = await pool.request()
-            .input('IdRespuesta',sql.Int, IdRespuesta)
-            .input('Descripcion',sql.VarChar, Respuestas?.Descripcion ?? '')
-            .input('IdFormulario',sql.Int, Respuestas?.IdFormulario?? '')
-            .input('IdMascota',sql.Int, Respuestas?.IdMascota ?? '')
-            .input('IdUsuario',sql.Int, Respuestas?.IdUsuario ?? '')
-            .query(`UPDATE Respuestas SET IdRespuesta = @IdRespuesta, Descripcion = @Descripcion, IdFormulario = @IdFormulario, IdMascota = @IdMascota, IdUsuario = @IdUsuario WHERE IdRespuestas = @Id`);
+        .input('IdRespuesta',sql.Int, Respuestas?.IdRespuesta ?? '')
+        .input('Descripcion',sql.VarChar, Respuestas?.Descripcion ?? '')
+        .input('IdPregunta',sql.Int, Respuestas?.IdPregunta ?? '')
+        .input('IdPostulacion',sql.Int, Respuestas?.IdPostulacion ?? '')
+            .query(`UPDATE Respuestas SET IdRespuesta = @IdRespuesta, Descripcion = @Descripcion, IdPregunta = @IdPregunta, IdPostulacion = @IdPostulacion WHERE IdRespuestas = @Id`);
         console.log(response)
 
         return response.recordset;

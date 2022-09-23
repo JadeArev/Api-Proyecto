@@ -3,12 +3,11 @@ import { RespuestaService } from '../services/RespuestaService.js';
 
 const router = Router();
 const respuestaService = new RespuestaService();
-//const Service = new RespuestaService();
 
 router.get('', async (req, res) => {
   console.log(`This is a get operation`);
 
-  const Respuesta  = await respuestaService.getRespuesta();
+  const Respuesta  = await respuestaService.getRespuestas();
  
   return res.status(200).json(Respuesta);
 });
