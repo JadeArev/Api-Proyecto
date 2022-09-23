@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('', async (req, res) => {
   console.log(`This is a post operation`);
-
+  console.log(req.body);
   const Respuesta = await respuestaService.createRespuesta(req.body);
 
   return res.status(201).json(Respuesta);
