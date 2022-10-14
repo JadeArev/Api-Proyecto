@@ -30,15 +30,16 @@ export class PostulacionService {
     }
 
     createPostulacion = async (Postulacion) => {
+
         console.log('This is a function on the service');
 
         const pool = await  sql.connect(config);
         const response = await pool.request()
-            .input('IdPostulacion',sql.Int, id)
+         // .input('IdPostulacion',sql.Int, Postulacion?.IdPostulacion ?? '')
             .input('IdUsuario',sql.Int, Postulacion?.IdUsuario ?? '')
             .input('IdMascota',sql.Int, Postulacion?.IdMascota ?? '')
             .input('IdMascota',sql.Bit, Postulacion?.Aceptado ?? '')
-            .query(`INSERT INTO ${PostulacionTabla}(IdPostulacion, IdUsuario, IdMascota, Aceptado) VALUES (@IdPostulacion, @IdUsuario, @IdMascota, @Aceptado)`);
+            .query(`INSERT INTO ${PostulacionTabla} (IdUsuario, IdMascota, Aceptado) VALUES (@IdUsuario, @IdMascota, @Aceptado)`);
         console.log(response)
 
         return response.recordset;
