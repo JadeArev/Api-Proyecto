@@ -6,7 +6,6 @@ const router = Router();
 const mascotaService = new MascotaService();
 
 router.get('', async (req, res) => {
-  console.log(`This is a get operation`);
 
   const Mascotas = await mascotaService.getMascota();
  
@@ -15,7 +14,6 @@ router.get('', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
-  console.log(`This is a get operation`);
 
   const Mascotas = await mascotaService.getMascotaById(req.params.id);
 
@@ -23,7 +21,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('', async (req, res) => {
-  console.log(`This is a post operation`);
 
   const Mascotas = await mascotaService.createMascota(req.body);
 

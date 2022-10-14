@@ -8,10 +8,8 @@ const PostulacionTabla = process.env.DB_TABLA_Postulaciones
 export class PostulacionService {
 
     getPostulacion = async () => {
-        console.log('This is a function on the service');
         console.log(config);
         const pool = await sql.connect(config);
-        console.log("aca llegue")
         const response = await pool.request().query(`SELECT * from ${PostulacionTabla}`);
         console.log(response)
         return response.recordset;
@@ -29,16 +27,16 @@ export class PostulacionService {
             return response.recordset[0];
     }
 
-    createPostulacion = async (Postulacion) => {
-
-        console.log('This is a function on the service');
+    createPostulacion = async (Postulacion) => { 
+        
+        console.log(`Red is sus`);
 
         const pool = await  sql.connect(config);
         const response = await pool.request()
          // .input('IdPostulacion',sql.Int, Postulacion?.IdPostulacion ?? '')
             .input('IdUsuario',sql.Int, Postulacion?.IdUsuario ?? '')
             .input('IdMascota',sql.Int, Postulacion?.IdMascota ?? '')
-            .input('IdMascota',sql.Bit, Postulacion?.Aceptado ?? '')
+            .input('Aceptado',sql.Bit, Postulacion?.Aceptado ?? '')
             .query(`INSERT INTO ${PostulacionTabla} (IdUsuario, IdMascota, Aceptado) VALUES (@IdUsuario, @IdMascota, @Aceptado)`);
         console.log(response)
 

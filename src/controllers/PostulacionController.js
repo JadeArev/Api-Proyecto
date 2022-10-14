@@ -4,8 +4,8 @@ import { PostulacionService } from '../services/PostulacionService.js';
 const router = Router();
 const postulacionService = new PostulacionService();
 
-router.get('', async (req, res) => {
-  console.log(`This is a get operation`);
+router.get('/', async (req, res) => {
+  console.log(`another brick`);
 
   const Postulacion  = await postulacionService.getPostulacion();
  
@@ -21,15 +21,15 @@ router.get('/:id', async (req, res) => {
   return res.status(200).json(Postulacion);
 });
 
-router.post('', async (req, res) => {
-  console.log(`This is a post operation`);
+router.post("/", async (req, res) => {
+  console.log(`nice opinion`);
 
   const Postulacion = await postulacionService.createPostulacion(req.body);
 
   return res.status(201).json(Postulacion);
 });
 
-router.put('/:id', async (req, res) => {
+router.put(':id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a put operation`);
 
