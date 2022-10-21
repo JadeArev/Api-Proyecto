@@ -6,19 +6,25 @@ const respuestaService = new RespuestaService();
 
 router.get('', async (req, res) => {
   console.log(`This is a get operation`);
-
-  const Respuesta  = await respuestaService.getRespuestas();
+ try {
+   const Respuesta  = await respuestaService.getRespuestas();
+   return res.status(200).json(Respuesta);
+  
+ } catch (error) {
+  return res.status(400).json({mensaje: 'Error en la consulta'});
+ }
  
-  return res.status(200).json(Respuesta);
 });
 
 router.get('/:id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a get operation`);
-
-  const Respuesta = await respuestaService.getRespuestaById(req.params.id);
-
-  return res.status(200).json(Respuesta);
+  try{
+    const Respuesta = await respuestaService.getRespuestasById(req.params.id);
+    return res.status(200).json(Respuesta);
+  } catch (error) {
+    return res.status(400).json({mensaje: 'Error en la consulta'});
+  }
 });
 
 router.post('', async (req, res) => {

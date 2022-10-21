@@ -16,15 +16,13 @@ export class RespuestaService {
         return response.recordset;
     }
 
-  
 
     getRespuestasById = async (id) => {
         console.log('This is a function on the service');
-
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(`SELECT * from ${RespuestasTabla} where IdRespuestas = @id`);
+            .query(`SELECT * from ${RespuestasTabla} where IdRespuesta = @id`);
         console.log(response)
         
         return response.recordset[0];
