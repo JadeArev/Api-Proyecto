@@ -15,8 +15,6 @@ export class UsuarioService {
     }
 
    
-    
-
     getUsuarioById = async (id) => {
 
         const pool = await sql.connect(config);
@@ -45,38 +43,9 @@ export class UsuarioService {
         const pool = await  sql.connect(config);
         const response = await pool.request()
         .input('Email',sql.VarChar, usuario?.Email ?? '')
-        .query(`SELECT * from ${usuarioTabla} where Email = @Email`);
+        .query(`SELECT TOP 1 * from ${usuarioTabla} where Email = @Email` );
         return response.recordset;
     }
-
-    validarTokenUsuario = async (req, res ) => {
-	    const token = await generarJWT( req.user.id )
-    
-	    res.json({
-		    usuario: req.usuario,
-		    token: token,
-	    })
-
-    }
-
-    // updateMascotaById = async (id, Mascota) => {
-    //     console.log('This is a function on the service');
-    //     console.log(id)
-    //     const pool =await  sql.connect(config);
-    //     const response = await pool.request()
-    //     .input('Id',sql.Int, id)
-    //     .input('Nombre',sql.VarChar, Mascota?.Nombre ?? '')
-    //     .input('Edad',sql.Int, Mascota?.Edad ?? 0)
-    //     .input('Estado',sql.VarChar, Mascota?.Estado ?? '')
-    //     .input('IdRefugio',sql.Int, Mascota?.IdRefugio ?? 0)
-    //     .input('Foto',sql.VarChar, Mascota?.Foto ?? '')
-    //     .input('IdRaza',sql.Int, Mascota?.IdRaza ?? 0)
-    //     .input('Castrado',sql.Bit, Mascota?.Castrado ?? 0)
-    //         .query(`UPDATE  ${mascotaTabla} SET Nombre = @Nombre, Edad = @Edad, Estado = @Estado, IdRefugio = @IdRefugio, Foto = @Foto, IdRaza=@IdRaza, Castrado=@Castrado WHERE IdMascota = @Id`);
-    //     console.log(response)
-
-    //     return response.recordset;
-    // }
 
     deleteUsuarioById = async (id) => {
         console.log('This is a function on the service');

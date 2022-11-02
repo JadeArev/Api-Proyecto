@@ -1,6 +1,7 @@
 import { generarJWT } from '../utils/generar-jwt.js'
 import { Router } from 'express';
 import { UsuarioService } from '../services/UsuarioService.js';
+import { validarJWT } from '../utils/validar-jwt.js';
 
 
 const router = Router();
@@ -13,6 +14,14 @@ router.get('', async (req, res) => {
   return res.status(200).json(Usuarios);
 });
 
+router.get('/auth', [validarJWT], async (req,res) => {
+  console.log(req)
+  const token = await generarJWT( req.usuario.IdUsuario )
+  res.json({
+    usuario: req.usuario,
+    token: token,
+  })
+}) 
 router.get('/:id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
     const {id} = req.params
@@ -22,7 +31,6 @@ router.get('/:id', async (req, res) => {
   return res.status(200).json(Usuarios);
 });
 
-// router.get('/auth',validarTokenUsuario ) 
 
 router.post('', async (req, res) => {
 
@@ -48,8 +56,7 @@ router.post('/login', async(req,res) => {
     //         mensaje: 'La contraseña es incorrecta'
     //     })
     // }
-
-    const token = await generarJWT(usuario.IdUsuario)
+    const token = await generarJWT(usuario[0].IdUsuario)
 
 
     return res.status(200).json({usuario, token})
