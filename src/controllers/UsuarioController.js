@@ -1,6 +1,9 @@
 import { generarJWT } from '../utils/generar-jwt.js'
 import { Router } from 'express';
 import { UsuarioService } from '../services/UsuarioService.js';
+import { validarJWT } from '../utils/validar-jwt.js';
+
+import bcryptjs from 'bcryptjs';
 
 
 const router = Router();
@@ -13,6 +16,18 @@ router.get('', async (req, res) => {
   return res.status(200).json(Usuarios);
 });
 
+router.get('/auth',[validarJWT], async (req,res) => {
+
+    const token = await generarJWT( req.usuario.id )
+  
+    res.json({
+      usuario: req.usuario,
+      token: token,
+    })
+  } 
+) 
+
+
 router.get('/:id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
     const {id} = req.params
@@ -22,10 +37,10 @@ router.get('/:id', async (req, res) => {
   return res.status(200).json(Usuarios);
 });
 
-// router.get('/auth',validarTokenUsuario ) 
 
 router.post('', async (req, res) => {
-
+  const salt = bcryptjs.genSaltSync()
+	req.body.Password = bcryptjs.hashSync(req.body.Password, salt)
   const Usuarios = await usuarioService.createUsuario(req.body);
  
 
@@ -41,13 +56,13 @@ router.post('/login', async(req,res) => {
         })
     }
 
-
-    // const validPassword = bcryptjs.compareSync(password, user.password)
-    // if(!validPassword){
-    //     return res.status(400).json({
-    //         mensaje: 'La contraseña es incorrecta'
-    //     })
-    // }
+                                                
+    const validPassword = bcryptjs.compareSync(req.body.Password, usuario.Password)
+    if(!validPassword){
+        return res.status(400).json({
+            mensaje: 'La contraseña es incorrecta'
+        })
+    }
 
     const token = await generarJWT(usuario.IdUsuario)
 

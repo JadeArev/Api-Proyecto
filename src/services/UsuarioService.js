@@ -46,18 +46,9 @@ export class UsuarioService {
         const response = await pool.request()
         .input('Email',sql.VarChar, usuario?.Email ?? '')
         .query(`SELECT * from ${usuarioTabla} where Email = @Email`);
-        return response.recordset;
+        return response.recordset[0]; 
     }
 
-    validarTokenUsuario = async (req, res ) => {
-	    const token = await generarJWT( req.user.id )
-    
-	    res.json({
-		    usuario: req.usuario,
-		    token: token,
-	    })
-
-    }
 
     // updateMascotaById = async (id, Mascota) => {
     //     console.log('This is a function on the service');
