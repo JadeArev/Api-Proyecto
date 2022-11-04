@@ -48,8 +48,9 @@ router.post('', async (req, res) => {
 });
 
 router.post('/login', async(req,res) => {
+    console.log("Si llega! Si se puede!")
     const usuario = await usuarioService.login(req.body)
-
+  console.log(usuario)
     if(!usuario){
         return res.status(400).json({
             mensaje: 'Email / passsword no son correctos - correo'
