@@ -2,7 +2,7 @@ import 'dotenv/config'
 import sql from 'mssql/msnodesqlv8.js';
 var config = {
   driver: 'msnodesqlv8',
-  connectionString: 'Driver=SQL Server;Server=A-PHZ2-CIDI-011;Database=Api;Trusted_Connection=true;'
+  connectionString: 'Driver=SQL Server;Server=A-PHZ2-CEO-009;Database=Api;Trusted_Connection=true;'
 };
 
 // import sql from 'mssql'
