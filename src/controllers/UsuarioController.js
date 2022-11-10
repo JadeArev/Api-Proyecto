@@ -56,7 +56,6 @@ router.post('/login', async(req,res) => {
         })
     }
 
-                                                
     const validPassword = bcryptjs.compareSync(req.body.Password, usuario.Password)
     if(!validPassword){
         return res.status(400).json({
