@@ -44,7 +44,8 @@ export class UsuarioService {
     login = async (usuario) => {
         const pool = await  sql.connect(config);
         const response = await pool.request()
-        .query(`SELECT * from ${usuario} where Email = @Email`);
+        .input('Email',sql.VarChar, usuario?.Email ?? '')
+        .query(`SELECT * from ${usuarioTabla} where Email = @Email`);
         return response.recordset[0]; 
     }
 
