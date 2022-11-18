@@ -13,7 +13,7 @@ export class MascotaService {
         const pool = await sql.connect(config);
         console.log("aca llegué")
         const response = await pool.request().query(`SELECT Mascota.Edad, Mascota.Foto, (SELECT nombre from Raza where IdRaza = Mascota.IdRaza) as NombreRaza, (SELECT NombreMascota from Refugio where IdRefugio = Mascota.IdRefugio) as NombreRefugio, Mascota.IdRaza, Mascota.Estado, Mascota.NombreMascota, Mascota.IdRefugio, Mascota.Castrado, Mascota.IdMascota from Mascota`);
-        console.log(response)
+        console.log(response)   
         return response.recordset;
     }
 
