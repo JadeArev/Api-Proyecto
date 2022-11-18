@@ -12,7 +12,7 @@ export class MascotaService {
         console.log(config);
         const pool = await sql.connect(config);
         console.log("aca llegué")
-        const response = await pool.request().query(`SELECT Mascota.Edad, Mascota.Foto, (SELECT nombre from Raza where IdRaza = Mascota.IdRaza) as NombreRaza, (SELECT Nombre from Refugio where IdRefugio = Mascota.IdRefugio) as NombreRefugio, Mascota.IdRaza, Mascota.Estado, Mascota.Nombre, Mascota.IdRefugio, Mascota.Castrado, Mascota.IdMascota from Mascota`);
+        const response = await pool.request().query(`SELECT Mascota.Edad, Mascota.Foto, (SELECT nombre from Raza where IdRaza = Mascota.IdRaza) as NombreRaza, (SELECT NombreMascota from Refugio where IdRefugio = Mascota.IdRefugio) as NombreRefugio, Mascota.IdRaza, Mascota.Estado, Mascota.NombreMascota, Mascota.IdRefugio, Mascota.Castrado, Mascota.IdMascota from Mascota`);
         console.log(response)
         return response.recordset;
     }
@@ -37,14 +37,14 @@ export class MascotaService {
 
         const pool = await  sql.connect(config);
         const response = await pool.request()
-            .input('Nombre',sql.VarChar, Mascota?.Nombre ?? '')
+            .input('NombreMascota',sql.VarChar, Mascota?.NombreMascota ?? '')
             .input('Edad',sql.Int, Mascota?.Edad ?? 0)
             .input('Estado',sql.VarChar, Mascota?.Estado ?? '')
             .input('IdRefugio',sql.Int, Mascota?.IdRefugio ?? 0)
             .input('Foto',sql.VarChar, Mascota?.Foto ?? '')
             .input('IdRaza',sql.Int, Mascota?.IdRaza ?? 0)
             .input('Castrado',sql.Bit, Mascota?.Castrado ?? 0)
-            .query(`INSERT INTO ${mascotaTabla}(Nombre, Edad, Estado, IdRefugio, Foto, IdRaza, Castrado) VALUES (@Nombre, @Edad, @Estado, @IdRefugio, @Foto, @IdRaza, @Castrado)`);
+            .query(`INSERT INTO ${mascotaTabla}(NombreMascota, Edad, Estado, IdRefugio, Foto, IdRaza, Castrado) VALUES (@NombreMascota, @Edad, @Estado, @IdRefugio, @Foto, @IdRaza, @Castrado)`);
         console.log(response)
 
         return response.recordset;
@@ -56,14 +56,14 @@ export class MascotaService {
         const pool =await  sql.connect(config);
         const response = await pool.request()
         .input('Id',sql.Int, id)
-        .input('Nombre',sql.VarChar, Mascota?.Nombre ?? '')
+        .input('NombreMascota',sql.VarChar, Mascota?.NombreMascota ?? '')
         .input('Edad',sql.Int, Mascota?.Edad ?? 0)
         .input('Estado',sql.VarChar, Mascota?.Estado ?? '')
         .input('IdRefugio',sql.Int, Mascota?.IdRefugio ?? 0)
         .input('Foto',sql.VarChar, Mascota?.Foto ?? '')
         .input('IdRaza',sql.Int, Mascota?.IdRaza ?? 0)
         .input('Castrado',sql.Bit, Mascota?.Castrado ?? 0)
-            .query(`UPDATE  ${mascotaTabla} SET Nombre = @Nombre, Edad = @Edad, Estado = @Estado, IdRefugio = @IdRefugio, Foto = @Foto, IdRaza=@IdRaza, Castrado=@Castrado WHERE IdMascota = @Id`);
+            .query(`UPDATE  ${mascotaTabla} SET NombreMascota = @NombreMascota, Edad = @Edad, Estado = @Estado, IdRefugio = @IdRefugio, Foto = @Foto, IdRaza=@IdRaza, Castrado=@Castrado WHERE IdMascota = @Id`);
         console.log(response)
 
         return response.recordset;
@@ -75,7 +75,7 @@ export class MascotaService {
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(`DELETE FROM ${MascotaTabla} WHERE IDMascota = @id`);
+            .query(`DELETE FROM ${mascotaTabla} WHERE IDMascota = @id`);
         console.log(response)
 
         return response.recordset;

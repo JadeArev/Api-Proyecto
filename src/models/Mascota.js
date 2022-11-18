@@ -1,7 +1,7 @@
 export class Mascota {
     IdMascota;
     Foto;
-    Nombre;
+    NombreMascota;
     Edad;
     IdRefugio;
     IdRaza;

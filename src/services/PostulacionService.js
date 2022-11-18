@@ -10,7 +10,23 @@ export class PostulacionService {
     getPostulacion = async () => {
         console.log(config);
         const pool = await sql.connect(config);
-        const response = await pool.request().query(`SELECT * from ${PostulacionTabla}`);
+        const response = await pool.request().query(`SELECT DISTINCT
+        Mascota.[IdMascota]	 ,
+        Mascota.[NombreMascota]	 ,
+        Mascota.[Edad]		 ,
+        Mascota.[Estado]	 ,
+        Mascota.[IdRefugio]	 ,
+        Mascota.[Foto]		 ,
+        Mascota.[IdRaza]	 ,
+        Mascota.[Castrado]	 ,
+        Usuario.[Nombre]	 ,
+        Usuario.[Apellido]
+FROM Mascota
+INNER JOIN Postulaciones ON Mascota.IdMascota = Postulaciones.IdMascota
+INNER JOIN Usuario ON Postulaciones.IdUsuario = Usuario.IdUsuario
+order by Mascota.[IdMascota]
+
+`);
         console.log(response)
         return response.recordset;
     }
@@ -21,7 +37,22 @@ export class PostulacionService {
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(`SELECT * from ${PostulacionTabla} where IdPostulacion = @id`);
+            .query(`SELECT DISTINCT
+		Mascota.[IdMascota]	 ,
+		Mascota.[Nombre]	 ,
+		Mascota.[Edad]		 ,
+		Mascota.[Estado]	 ,
+		Mascota.[IdRefugio]	 ,
+		Mascota.[Foto]		 ,
+		Mascota.[IdRaza]	 ,
+		Mascota.[Castrado]	 ,
+		Usuario.[Nombre]	 ,
+		Usuario.[Apellido]
+FROM Mascota
+INNER JOIN Postulaciones ON Mascota.IdMascota = Postulaciones.IdMascota
+INNER JOIN Usuario ON Postulaciones.IdUsuario = Usuario.IdUsuario
+order by Mascota.[IdMascota]
+`);
         console.log(response)
         
             return response.recordset[0];
