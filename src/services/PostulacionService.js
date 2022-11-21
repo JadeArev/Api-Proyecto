@@ -20,7 +20,9 @@ export class PostulacionService {
             Mascota.[IdRaza]	 ,
             Mascota.[Castrado]	 ,
             Usuario.[Nombre]	 ,
-            Usuario.[Apellido]
+            Usuario.[Apellido],
+            Postulaciones.IdPostulacion,
+            Postulaciones.Aceptado
     FROM Mascota
     INNER JOIN Postulaciones ON Mascota.IdMascota = Postulaciones.IdMascota
     INNER JOIN Usuario ON Postulaciones.IdUsuario = Usuario.IdUsuario
