@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { RefugioService } from '../services/RefugioService.js';
-
+import bcryptjs from 'bcryptjs';
 
 const router = Router();
 const refugioService = new RefugioService();
@@ -21,12 +21,13 @@ router.get('/:id',  async (req, res) => {
 });
 
 router.post('',  async (req, res) => {
-  console.log(`This is a post operation`);
-    console.log(res);
+    const salt = bcryptjs.genSaltSync()
+    req.body.Password = bcryptjs.hashSync(req.body.Password, salt)
   const Refugio = await refugioService.createRefugio(req.body);
 
   return res.status(201).json(Refugio);
 });
+
 
 router.put('/:id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);

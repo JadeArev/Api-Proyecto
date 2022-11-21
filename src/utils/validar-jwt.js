@@ -13,27 +13,39 @@ export const validarJWT = async (req,res,next)=> {
 			mensaje: 'no hay token en la petición'
 		})
 	}
-
+	let usuario = null
+	let refugio = null
 	try {
 		const secret = process.env.SECRETORPRIVATEKEY
-		const {uid} = jwt.verify(token,secret)
-		// const user = await User.findById(uid)
-		console.log("uid ", uid)
-		const pool = await sql.connect(config);
-        const response = await pool.request()
-        .input('id',sql.Int, uid)
-        .query(`SELECT * from Usuario where IdUsuario = @id`);
-        const usuario = response.recordset[0]; 
-		console.log("Usuario ",usuario)
-		if(!usuario) {
+		const {uid, isRefugio} = jwt.verify(token,secret)
+		console.log(isRefugio)
+		console.log("UId",uid)
+		if(isRefugio) {
+			const pool = await sql.connect(config);
+			const response = await pool.request()
+			.input('id',sql.Int, uid)
+			.query(`SELECT * from Refugio where IdRefugio = @id`);
+			refugio = response.recordset[0]; 
+			req.refugio = refugio
+		}else{
+			const pool = await sql.connect(config);
+			const response = await pool.request()
+			.input('id',sql.Int, uid)
+			.query(`SELECT * from Usuario where IdUsuario = @id`);
+			usuario = response.recordset[0]; 
+			console.log(usuario)
+			req.usuario = usuario
+
+		}
+		if(!usuario && !refugio) {
 			return res.status(401).json({
-				mensaje: 'Usuario no existe en la Base de datos'
+				mensaje: 'Usuario | Refugio no existe en la Base de datos'
 			})
 		}
 
 
 		
-		req.usuario = usuario
+		// req.usuario = usuario
 		next()
         
 	} catch (error) {

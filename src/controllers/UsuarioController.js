@@ -16,16 +16,16 @@ router.get('', async (req, res) => {
   return res.status(200).json(Usuarios);
 });
 
-router.get('/auth',[validarJWT], async (req,res) => {
+// router.get('/auth',[validarJWT], async (req,res) => {
 
-    const token = await generarJWT( req.usuario.id )
+//     const token = await generarJWT( req.usuario.id )
   
-    res.json({
-      usuario: req.usuario,
-      token: token,
-    })
-  } 
-) 
+//     res.json({
+//       usuario: req.usuario,
+//       token: token,
+//     })
+//   } 
+// ) 
 
 
 router.get('/:id', async (req, res) => {
@@ -47,87 +47,29 @@ router.post('', async (req, res) => {
   return res.status(201).json(Usuarios);
 });
 
-router.post('/login', async(req,res) => {
-    console.log("Si llega! Si se puede!")
-    const usuario = await usuarioService.login(req.body)
-  console.log(usuario)
-    if(!usuario){
-        return res.status(400).json({
-            mensaje: 'Email / passsword no son correctos - correo'
-        })
-    }
+// router.post('/login', async(req,res) => {
+//     console.log("Si llega! Si se puede!")
+//     const usuario = await usuarioService.login(req.body)
+//   console.log(usuario)
+//     if(!usuario){
+//         return res.status(400).json({
+//             mensaje: 'Email / passsword no son correctos - correo'
+//         })
+//     }
 
-    const validPassword = bcryptjs.compareSync(req.body.Password, usuario.Password)
-    if(!validPassword){
-        return res.status(400).json({
-            mensaje: 'La contraseña es incorrecta'
-        })
-    }
+//     const validPassword = bcryptjs.compareSync(req.body.Password, usuario.Password)
+//     if(!validPassword){
+//         return res.status(400).json({
+//             mensaje: 'La contraseña es incorrecta'
+//         })
+//     }
 
-    const token = await generarJWT(usuario.IdUsuario)
-
-
-    return res.status(200).json({usuario, token})
-} )
+//     const token = await generarJWT(usuario.IdUsuario)
 
 
-// router.put('/:id', async (req, res) => {
-//   console.log(`Request URL Param: ${req.params.id}`);
-//   console.log(`This is a put operation`);
+//     return res.status(200).json({usuario, token})
+// } )
 
-//   const Mascotas = await mascotaService.updateMascotaById(req.params.id, req.body);
 
-//   return res.status(200).json(Mascotas);
-// });
-
-// router.delete('/:id', async (req, res) => {
-//   console.log(`Request URL Param: ${req.params.id}`);
-//   console.log(`This is a delete operation`);
-
-//   const Mascotas = await mascotaService.deleteMascotaById(req.params.id);
-
-//   return res.status(200).json(Mascotas);
-// });
 
 export default router;
-
-// export const login = async (req, res) => {
-// 	const {Email, Password} =req.body
-
-// 	try {
-
-// 		const user = await User.findOne({email})
-// 		if(!user){
-// 			return res.status(400).json({
-// 				msg: 'Email / passsword no son correctos - correo'
-// 			})
-// 		}
-
-// 		if(!user.estado){
-// 			return res.status(400).json({
-// 				msg: 'El usuario se encuentra con estado desactivado'
-// 			})
-// 		}
-
-// 		const validPassword = bcryptjs.compareSync(password, user.password)
-// 		if(!validPassword){
-// 			return res.status(400).json({
-// 				msg: 'La contraseña es incorrecta'
-// 			})
-// 		}
-		
-// 		//generar jwt
-// 		const token = await generarJWT(user.id)
-
-// 		res.json({
-// 			user, 
-// 			token
-// 		})
-// 	} catch (error) {
-// 		console.log(error)
-// 		return res.status(500).json({
-// 			msg: 'Hable con el administrador'
-// 		})
-// 	}
-// }
-

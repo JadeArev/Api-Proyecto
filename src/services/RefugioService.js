@@ -47,6 +47,14 @@ export class RefugioService {
         return response.recordset;
     }
 
+    loginRefugio = async (refugio) => {
+        const pool = await  sql.connect(config);
+        const response = await pool.request()
+        .input('Email',sql.VarChar, refugio?.Email ?? '')
+        .query(`SELECT * from ${RefugioTabla} where Email = @Email`);
+        return response.recordset[0]; 
+    }
+
     updateRefugioById = async (id, Refugio) => {
         console.log('This is a function on the service');
 

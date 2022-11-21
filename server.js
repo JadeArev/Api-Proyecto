@@ -7,6 +7,7 @@ import PreguntaRouter from "./src/controllers/PreguntaController.js";
 import RespuestaRouter from "./src/controllers/RespuestaController.js";
 import PostulacionRouter from "./src/controllers/PostulacionController.js";
 import UsuarioRouter from "./src/controllers/UsuarioController.js";
+import AuthRouter from './src/controllers/AuthController.js'
 
 const app = express();
 const port = 5000;
@@ -21,6 +22,7 @@ app.use("/Pregunta", PreguntaRouter);
 app.use("/Respuesta", RespuestaRouter);
 app.use("/Postulaciones", PostulacionRouter);
 app.use("/Usuario", UsuarioRouter);
+app.use("/Auth", AuthRouter);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
