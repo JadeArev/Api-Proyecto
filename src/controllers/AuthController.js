@@ -61,12 +61,12 @@ router.post('/loginRefugio', async(req,res) => {
         })
     }
 
-    // const validPassword = bcryptjs.compareSync(req.body.Password, refugio.Password)
-    // if(!validPassword){
-    //     return res.status(400).json({
-    //         mensaje: 'La contraseña es incorrecta'
-    //     })
-    // }
+    const validPassword = bcryptjs.compareSync(req.body.Password, refugio.Password)
+    if(!validPassword){
+        return res.status(400).json({
+            mensaje: 'La contraseña es incorrecta'
+        })
+    }
 
     const token = await generarJWT(refugio.IdRefugio, true)
 
