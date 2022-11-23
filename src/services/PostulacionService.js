@@ -61,17 +61,18 @@ export class PostulacionService {
         return response.recordset;
     }
 
-    updatePostulacionById = async (id, Postulacion) => {
+    updatePostulacionById = async (id, aceptado) => {
         console.log('This is a function on the service');
         console.log(id)
         const pool = await  sql.connect(config);
         const response = await pool.request()
-        .input('IdPostulacion',sql.Int, id)
-        .input('IdUsuario',sql.Int, Postulacion?.IdUsuario ?? '')
-        .input('IdMascota',sql.Int, Postulacion?.IdMascota ?? '')
-        .input('IdMascota',sql.Bit, Postulacion?.Aceptado ?? '')
+        .input('Id',sql.Int, id)
+        .input('Aceptado',sql.BigInt, aceptado)
+        // .input('IdUsuario',sql.Int, Postulacion?.IdUsuario ?? '')
+        // .input('IdMascota',sql.Int, Postulacion?.IdMascota ?? '')
+        // .input('IdMascota',sql.Bit, Postulacion?.Aceptado ?? '')
        
-            .query(`UPDATE  ${PostulacionTabla} SET IdUsuario = @IdUsuario, IdMascota = @IdMascota, Aceptado = @Aceptado WHERE IdPostulacion = @Id`);
+            .query(`UPDATE  ${PostulacionTabla} SET Aceptado = @Aceptado WHERE IdPostulacion = @Id`);
         console.log(response)
 
         return response.recordset;

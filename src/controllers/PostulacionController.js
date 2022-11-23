@@ -29,11 +29,13 @@ router.post("/", async (req, res) => {
   return res.status(201).json(Postulacion);
 });
 
-router.put(':id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a put operation`);
 
-  const Postulacion = await postulacionService.updatePostulacionById(req.params.id, req.body);
+  const {Aceptado}= req.body
+
+  const Postulacion = await postulacionService.updatePostulacionById(req.params.id, Aceptado);
 
   return res.status(200).json(Postulacion);
 });
